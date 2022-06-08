@@ -4,6 +4,10 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { login } from "../../api/ApiMethods";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const {
@@ -13,7 +17,19 @@ function Login() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => console.log("dataaaaaa", data);
+
+  let navigate = useNavigate();
+
+  const { handleSignIn } = useContext(AuthContext);
+
+  const handleLogin = async (data) => {
+    const response = await login(data);
+    if (response.status === 200) {
+      handleSignIn(response.data);
+      navigate("/home");
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
@@ -21,7 +37,10 @@ function Login() {
           <p className={styles.topText}>BALL FOR ALL</p>
           <p className={styles.topText}>Login to your account</p>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.subContainer}>
+        <form
+          onSubmit={handleSubmit(handleLogin)}
+          className={styles.subContainer}
+        >
           <CustomInput
             label={"Email"}
             name="email"
