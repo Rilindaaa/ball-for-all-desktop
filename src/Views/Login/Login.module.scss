@@ -1,0 +1,55 @@
+@import "../../theme/colors";
+
+.container {
+  height: 100vh;
+  background-image: url("../../assets/background.png");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 370px;
+  height: 550px;
+  background-color: $white;
+  border-radius: 10px;
+  align-items: center;
+  position: relative;
+}
+.subContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.bottomContainer {
+  height: 45px;
+  background: rgb(247, 245, 245);
+
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.forgotPassword {
+  margin-bottom: 50px;
+  color: $gray3;
+  opacity: 0.7;
+}
+.dontHaveAccount {
+  font-weight: 700;
+  color: $black;
+}
+.topText {
+  font-weight: 700;
+}
