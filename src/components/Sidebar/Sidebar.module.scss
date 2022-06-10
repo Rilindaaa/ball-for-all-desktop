@@ -1,0 +1,44 @@
+@import "../../theme/colors";
+
+.container {
+  width: 280px;
+  background-color: $background;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px solid rgba(173, 173, 173, 0.2);
+  border-radius: 6px;
+  padding: 5px 20px;
+}
+.subContainer {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-direction: row;
+  &:hover {
+    background-color: rgba($orange, 0.1);
+    border-radius: 6px;
+    .icon {
+      fill: $orange;
+    }
+  }
+}
+.sectionText {
+  font-size: 18px;
+  color: $white;
+  font-weight: 700;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.item {
+  display: flex;
+  flex-direction: row;
+  width: 270px;
+  padding: 10px;
+  align-items: center;
+}
+
+.icon {
+  fill: $gray3;
+}

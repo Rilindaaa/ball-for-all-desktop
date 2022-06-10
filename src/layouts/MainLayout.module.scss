@@ -1,0 +1,13 @@
+@import "../theme/colors";
+.container {
+  display: flex;
+  justify-content: space-between;
+  min-height: 80vh;
+  padding: 35px;
+  background-color: $background;
+}
+.subContainer {
+  display: flex;
+  width: 100%;
+  padding: 0 20px;
+}
