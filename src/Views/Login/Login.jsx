@@ -26,7 +26,7 @@ function Login() {
     const response = await login(data);
     if (response.status === 200) {
       handleSignIn(response.data);
-      navigate("/home");
+      navigate("/");
     }
   };
 
@@ -71,7 +71,7 @@ function Login() {
 }
 
 const schema = yup.object({
-  email: yup.string().required().label("Email"),
+  email: yup.string().email("Invalid email format").required().label("Email"),
   password: yup.string().required().label("Password"),
 });
 
