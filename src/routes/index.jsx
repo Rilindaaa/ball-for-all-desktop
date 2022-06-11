@@ -18,13 +18,13 @@ function Router() {
         <Routes>
           <Route path="/auth" element={<NonAuthRoute authData={authData} />}>
             {/* Routes that dont require authentication here */}
-            <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/login" exact element={<Login />} />
           </Route>
           <Route path="/" element={<SecureRoute authData={authData} />}>
             {/* Routes that require authentication here */}
             <Route path="/" element={<Home />} />
-            <Route path="/player" element={<Player />} />
-            <Route path="/club" element={<Club />} />
+            <Route path="/player" exact element={<Player />} />
+            <Route path="/club" exact element={<Club />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>

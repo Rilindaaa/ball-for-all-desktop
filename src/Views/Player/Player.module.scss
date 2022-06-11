@@ -1,0 +1,33 @@
+@import "../../theme/colors";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  //   width: 100%;
+  padding-bottom: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: $headerBg;
+  border-radius: 6px;
+}
+.topText {
+  font-size: 18px;
+  font-family: "Poppins", sans-serif;
+  color: $white;
+  font-weight: 700;
+}
+.textContainer {
+  display: flex;
+  flex-direction: row;
+  color: $white;
+  font-family: "Poppins", sans-serif;
+}
+.space {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.name {
+  margin-left: 4px;
+  margin-right: 4px;
+  font-weight: 700;
+}

@@ -1,5 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Prompt:wght@700&display=swap");
+@import "./colors";
 
 body {
   margin: 0;
+}
+
+th.MuiTableCell-head,
+th.MuiTableCell-body {
+  color: $orange;
+}
+
+td.MuiTableCell-body {
+  color: $white !important;
+}
+
+td.MuiTableCell-body {
+  &:last-child {
+    color: $red !important;
+  }
+}
+
+th.MuiTableCell-body,
+td.MuiTableCell-body {
+  border-bottom: 1px solid rgba(173, 173, 173, 0.3);
 }
