@@ -8,6 +8,7 @@ import { login } from "../../api/ApiMethods";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/images/logo-text-forte.png";
 
 function Login() {
   const {
@@ -34,7 +35,13 @@ function Login() {
     <div className={styles.container}>
       <div className={styles.formContainer}>
         <div className={styles.subContainer}>
-          <p className={styles.topText}>BALL FOR ALL</p>
+          <img
+            src={logo}
+            alt="Logo"
+            width={220}
+            height={70}
+            className={styles.image}
+          />
           <p className={styles.topText}>Login to your account</p>
         </div>
         <form
@@ -57,14 +64,6 @@ function Login() {
           />
           <CustomButton label={"Login"} />
         </form>
-        <div className={styles.subContainer}>
-          <p className={styles.forgotPassword}>Forgot Password?</p>
-          <div className={styles.bottomContainer}>
-            <p className={styles.dontHaveAccount}>
-              Dont have an account yet? Register
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   );
