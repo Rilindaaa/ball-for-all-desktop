@@ -4,7 +4,7 @@ import Client from "./ApiBase";
 
 export async function login(data) {
   try {
-    const result = await Client.post("login", { ...data });
+    const result = await Client.post("login?adminOnly=true", { ...data });
     return result;
   } catch (err) {
     console.error("login", err);

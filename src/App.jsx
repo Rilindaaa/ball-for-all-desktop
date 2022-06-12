@@ -1,12 +1,15 @@
 import "./theme/App.scss";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import Router from "./routes";
+import MainLayout from "./layouts/MainLayout";
 
 function App() {
   return (
     <AuthContextProvider>
       <div className="App">
-        <Router />
+        <MainLayout>
+          <Router />
+        </MainLayout>
       </div>
     </AuthContextProvider>
   );

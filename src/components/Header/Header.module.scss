@@ -1,0 +1,12 @@
+@import "../../theme/colors";
+
+.container {
+  width: 100%;
+  height: 70px;
+  background-color: $headerBg;
+  align-items: center;
+  border-bottom: 0.5px solid rgba(173, 173, 173, 0.2);
+}
+.image {
+  margin-left: 20px;
+}
