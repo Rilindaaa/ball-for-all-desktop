@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import "./PlayersTable.module.scss";
+import styles from "./PlayersTable.module.scss";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -36,29 +36,24 @@ export default function PlayersTable() {
         aria-label="simple table"
       >
         <TableHead>
-          <TableRow>
+          <TableRow className={styles.tableHeadRow}>
             <TableCell>NR</TableCell>
-            <TableCell align="left">FULLNAME</TableCell>
-            <TableCell align="left">DATE OF BIRTH</TableCell>
-            <TableCell align="left">EMAIL</TableCell>
-            <TableCell align="left">ACTION</TableCell>
+            <TableCell>FULLNAME</TableCell>
+            <TableCell>DATE OF BIRTH</TableCell>
+            <TableCell>EMAIL</TableCell>
+            <TableCell>ACTION</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
+            <TableRow key={row.name}>
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="left">{row.calories}</TableCell>
-              <TableCell align="left">{row.fat}</TableCell>
-              <TableCell align="left">{row.carbs}</TableCell>
-              <TableCell align="left" style={{ color: "red" }}>
-                Delete
-              </TableCell>
+              <TableCell>{row.calories}</TableCell>
+              <TableCell>{row.fat}</TableCell>
+              <TableCell>{row.carbs}</TableCell>
+              <TableCell>Delete</TableCell>
             </TableRow>
           ))}
         </TableBody>

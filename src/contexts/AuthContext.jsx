@@ -33,6 +33,7 @@ const AuthContextProvider = ({ children }) => {
   };
 
   const handleSignOut = async () => {
+    window.localStorage.setItem("AuthTok", "");
     setAuthData({});
   };
 

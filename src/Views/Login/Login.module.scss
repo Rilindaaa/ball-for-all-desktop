@@ -15,11 +15,12 @@
   flex-direction: column;
   justify-content: space-evenly;
   width: 370px;
-  height: 400px;
+  min-height: 400px;
   background-color: $white;
   border-radius: 10px;
   align-items: center;
   position: relative;
+  padding: 20px 10px;
 }
 .subContainer {
   display: flex;

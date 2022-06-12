@@ -2,5 +2,9 @@
 
 .container {
   width: 320px;
-  background-color: $mainGreen !important;
+  height: 50px;
+  .label {
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+  }
 }

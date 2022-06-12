@@ -11,7 +11,7 @@ const CustomInput = ({ label, onClick }) => {
       onClick={onClick}
       type="submit"
     >
-      {label}
+      <span className={styles.label}>{label}</span>
     </Button>
   );
 };
