@@ -3,6 +3,7 @@
 
 body {
   margin: 0;
+  font-family: "Poppins", sans-serif !important;
 }
 
 th.MuiTableCell-head,
@@ -23,4 +24,17 @@ td.MuiTableCell-body {
 th.MuiTableCell-body,
 td.MuiTableCell-body {
   border-bottom: 1px solid rgba(173, 173, 173, 0.3);
+}
+
+.MuiIcon-colorPrimary {
+  color: $mainGreen !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-width: 3px !important;
+  border-radius: 7px !important;
+}
+
+.MuiButton-root {
+  border-radius: 7px !important;
 }

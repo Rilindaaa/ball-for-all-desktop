@@ -1,6 +1,7 @@
 import styles from "./Login.module.scss";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import CustomButton from "../../components/CustomButton/CustomButton";
+import { ReactComponent as Logo } from "../../assets/svg/logo-black.svg";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -8,7 +9,6 @@ import { login } from "../../api/ApiMethods";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/images/logo-text-forte.png";
 
 function Login() {
   const {
@@ -35,13 +35,7 @@ function Login() {
     <div className={styles.container}>
       <div className={styles.formContainer}>
         <div className={styles.subContainer}>
-          <img
-            src={logo}
-            alt="Logo"
-            width={220}
-            height={70}
-            className={styles.image}
-          />
+          <Logo width={320} height={65} />
           <p className={styles.topText}>Login to your account</p>
         </div>
         <form
