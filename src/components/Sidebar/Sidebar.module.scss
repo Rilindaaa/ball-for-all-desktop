@@ -1,7 +1,7 @@
 @import "../../theme/colors";
 
 .container {
-  width: 280px;
+  width: 20%;
   background-color: $background;
   align-items: center;
   justify-content: center;
@@ -16,7 +16,7 @@
   flex-direction: row;
   margin: 4px 0;
   &:hover {
-    background-color: rgba($orange, 0.1);
+    background-color: rgba($orange, 0.04);
     border-radius: 6px;
     .icon {
       fill: $orange;
