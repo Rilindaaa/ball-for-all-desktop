@@ -59,7 +59,7 @@ export default function ClubsTable() {
         </TableHead>
         <TableBody>
           {clubs?.map((club, i) => (
-            <TableRow key={club.Club.clubId}>
+            <TableRow key={club.Club?.clubId}>
               <TableCell>{++i}</TableCell>
               <TableCell scope="row">{club.Club?.clubName}</TableCell>
               <TableCell>{club.Club?.city}</TableCell>
