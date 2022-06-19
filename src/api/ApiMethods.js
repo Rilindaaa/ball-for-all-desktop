@@ -63,3 +63,55 @@ export async function deleteClub(id) {
     return err;
   }
 }
+
+//Vacancies
+
+export async function getAllVacancies() {
+  try {
+    const result = await Client.get("vacancy");
+    return result.data;
+  } catch (err) {
+    console.error("getAllVacancies", err);
+  }
+}
+
+export async function deleteVacancy(id) {
+  try {
+    const result = await Client.delete(`vacancy/${id}`);
+    return result;
+  } catch (err) {
+    console.error("deleteVacancy", err);
+    return err;
+  }
+}
+
+// Admins
+
+export async function registerAdmin(data) {
+  try {
+    const result = await Client.post(`admin`, { ...data });
+    return result;
+  } catch (err) {
+    console.error("registerAdmin", err);
+    return err;
+  }
+}
+
+export async function getAllAdmins() {
+  try {
+    const result = await Client.get("admin");
+    return result.data;
+  } catch (err) {
+    console.error("getAllAdmins", err);
+  }
+}
+
+export async function deleteAdmin(id) {
+  try {
+    const result = await Client.delete(`admin/${id}`);
+    return result;
+  } catch (err) {
+    console.error("deleteAdmin", err);
+    return err;
+  }
+}

@@ -8,6 +8,8 @@ import NonAuthRoute from "./NonAuthRoute";
 import PageNotFound from "../Views/PageNotFound/PageNotFound";
 import Player from "../Views/Player/Player.jsx";
 import Club from "../Views/Club/Club.jsx";
+import Admin from "../Views/Admin/Admin.jsx";
+import Vacancy from "../Views/Vacancy/Vacancy.jsx";
 
 function Router() {
   const { loading, authData } = useContext(AuthContext);
@@ -23,8 +25,12 @@ function Router() {
           <Route path="/" element={<SecureRoute authData={authData} />}>
             {/* Routes that require authentication here */}
             <Route path="/" element={<Home />} />
-            <Route path="/player" exact element={<Player />} />
+            <Route path="/player" element={<Player />} />
             <Route path="/club" exact element={<Club />} />
+            <Route path="/vacancy" exact element={<Vacancy />} />
+            {authData?.Admin?.isSuperAdmin && (
+              <Route path="/admin" exact element={<Admin />} />
+            )}
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
