@@ -3,11 +3,12 @@ import styles from "./CustomButton.module.scss";
 
 import React from "react";
 
-const CustomInput = ({ label, onClick }) => {
+const CustomInput = ({ label, onClick, containerStyle }) => {
   return (
     <Button
       variant="contained"
       className={styles.container}
+      style={containerStyle}
       onClick={onClick}
       type="submit"
     >

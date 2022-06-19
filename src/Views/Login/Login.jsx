@@ -27,7 +27,7 @@ function Login() {
     const response = await login(data);
     if (response.status === 200) {
       handleSignIn(response.data);
-      navigate("/players");
+      navigate("/player");
     }
   };
 
