@@ -23,7 +23,7 @@ const CustomButton = ({
       type="submit"
       sx={{
         borderColor: color,
-        color: color,
+        color: variant !== "contained" ? color : "white",
         "&:hover": {
           backgroundColor: color,
           borderColor: color,
