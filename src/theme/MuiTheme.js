@@ -8,9 +8,9 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: `"Poppins", sans-serif`,
-    fontWeightLight: 300,
+    fontWeightLight: 200,
     fontWeightRegular: 400,
-    fontWeightMedium: 500,
+    fontWeightMedium: 600,
   },
 });
 export default theme;

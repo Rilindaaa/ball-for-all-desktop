@@ -7,32 +7,28 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "./PlayersTable.module.scss";
-import { getAllPlayers, deletePlayer } from "../../api/ApiMethods";
-import { useEffect, useState } from "react";
+import { deletePlayer } from "../../api/ApiMethods";
 import { useConfirm } from "material-ui-confirm";
+import { useSnackbar } from "notistack";
+import moment from "moment";
 
-export default function PlayersTable() {
-  const [players, setPlayers] = useState([]);
+export default function PlayersTable({ players, pager, setPlayers }) {
   const confirm = useConfirm();
-
-  const fetchPlayers = async () => {
-    const players = await getAllPlayers();
-    setPlayers(players);
-    console.log("players", players);
-  };
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleDeletePlayer = async (playerId) => {
     confirm({
       description: "Are you sure you want to delete this player?",
     }).then(async () => {
-      await deletePlayer(playerId);
-      await fetchPlayers();
+      const res = await deletePlayer(playerId);
+      if ((res.status = 200)) {
+        enqueueSnackbar("Player was deleted!", { variant: "info" });
+        setPlayers(players.filter(({ id }) => id !== playerId));
+      } else {
+        enqueueSnackbar("Please try again!", { variant: "error" });
+      }
     });
   };
-
-  useEffect(() => {
-    fetchPlayers();
-  }, []);
 
   return (
     <TableContainer
@@ -50,7 +46,7 @@ export default function PlayersTable() {
       >
         <TableHead>
           <TableRow className={styles.tableHeadRow}>
-            <TableCell>NR</TableCell>
+            <TableCell></TableCell>
             <TableCell>FIRSTNAME</TableCell>
             <TableCell>LASTNAME</TableCell>
             <TableCell>BIRTHDATE</TableCell>
@@ -65,11 +61,11 @@ export default function PlayersTable() {
         </TableHead>
         <TableBody>
           {players?.map((player, i) => (
-            <TableRow key={player.UserId}>
-              <TableCell>{++i}</TableCell>
+            <TableRow key={player.id}>
+              <TableCell>#{++i + pager.startIndex}</TableCell>
               <TableCell scope="row">{player.Player?.firstName}</TableCell>
               <TableCell>{player.Player?.lastName}</TableCell>
-              <TableCell>{player.birthDate}</TableCell>
+              <TableCell>{formatBirthDate(player.birthDate)}</TableCell>
               <TableCell>{player.email}</TableCell>
               <TableCell>{player.Player?.city}</TableCell>
               <TableCell>{player.Player?.foot}</TableCell>
@@ -91,3 +87,9 @@ export default function PlayersTable() {
     </TableContainer>
   );
 }
+
+const formatBirthDate = (date) => {
+  const formatedDate = moment(date).format("DD MMM YYYY");
+  if (moment(date).isValid()) return formatedDate;
+  return "";
+};

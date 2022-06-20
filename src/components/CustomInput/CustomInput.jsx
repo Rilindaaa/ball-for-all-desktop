@@ -29,6 +29,13 @@ const CustomInput = ({
             value={value}
             onChange={onChange}
             type={type}
+            sx={{
+              "& .MuiOutlinedInput-root:hover": {
+                "& > fieldset": {
+                  borderColor: "#228176",
+                },
+              },
+            }}
           />
         )}
       />

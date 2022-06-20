@@ -10,28 +10,25 @@ import styles from "./AdminsTable.module.scss";
 import { getAllAdmins, deleteAdmin } from "../../api/ApiMethods";
 import { useEffect, useState } from "react";
 import { useConfirm } from "material-ui-confirm";
+import { useSnackbar } from "notistack";
 
-export default function AdminsTable() {
-  const [admins, setAdmins] = useState([]);
+export default function AdminsTable({ admins, setAdmins, pager }) {
   const confirm = useConfirm();
-
-  const fetchAdmins = async () => {
-    const admins = await getAllAdmins();
-    setAdmins(admins);
-  };
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleDeleteAdmin = async (adminId) => {
     confirm({
       description: "Are you sure you want to delete this admin?",
     }).then(async () => {
-      await deleteAdmin(adminId);
-      await fetchAdmins();
+      const res = await deleteAdmin(adminId);
+      if ((res.status = 200)) {
+        enqueueSnackbar("Admin was deleted!", { variant: "info" });
+        setAdmins(admins.filter(({ id }) => id !== adminId));
+      } else {
+        enqueueSnackbar("Please try again!", { variant: "error" });
+      }
     });
   };
-
-  useEffect(() => {
-    fetchAdmins();
-  }, []);
 
   return (
     <TableContainer
@@ -49,7 +46,7 @@ export default function AdminsTable() {
       >
         <TableHead>
           <TableRow className={styles.tableHeadRow}>
-            <TableCell>NR</TableCell>
+            <TableCell></TableCell>
             <TableCell>FIRSTNAME</TableCell>
             <TableCell>LASTNAME</TableCell>
             <TableCell>EMAIL</TableCell>
@@ -59,7 +56,7 @@ export default function AdminsTable() {
         <TableBody>
           {admins?.map((admin, i) => (
             <TableRow key={admin.id}>
-              <TableCell>{++i}</TableCell>
+              <TableCell>#{++i + pager.startIndex}</TableCell>
               <TableCell scope="row">{admin.Admin.firstName}</TableCell>
               <TableCell>{admin.Admin.lastName}</TableCell>
               <TableCell>{admin.email}</TableCell>

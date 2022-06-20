@@ -7,31 +7,27 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "./ClubsTable.module.scss";
-import { getAllClubs, deleteClub } from "../../api/ApiMethods";
-import { useEffect, useState } from "react";
+import { deleteClub } from "../../api/ApiMethods";
 import { useConfirm } from "material-ui-confirm";
+import { useSnackbar } from "notistack";
 
-export default function ClubsTable() {
-  const [clubs, setClubs] = useState([]);
+export default function ClubsTable({ clubs, pager, setClubs }) {
   const confirm = useConfirm();
-
-  const fetchClubs = async () => {
-    const clubs = await getAllClubs();
-    setClubs(clubs);
-  };
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleDeleteClub = async (clubId) => {
     confirm({
       description: "Are you sure you want to delete this club?",
     }).then(async () => {
-      await deleteClub(clubId);
-      await fetchClubs();
+      const res = await deleteClub(clubId);
+      if ((res.status = 200)) {
+        enqueueSnackbar("Club was deleted!", { variant: "info" });
+        setClubs(clubs.filter(({ id }) => id !== clubId));
+      } else {
+        enqueueSnackbar("Please try again!", { variant: "error" });
+      }
     });
   };
-
-  useEffect(() => {
-    fetchClubs();
-  }, []);
 
   return (
     <TableContainer
@@ -49,7 +45,9 @@ export default function ClubsTable() {
       >
         <TableHead>
           <TableRow className={styles.tableHeadRow}>
-            <TableCell>NR</TableCell>
+            <TableCell></TableCell>
+            <TableCell>FIRSTNAME</TableCell>
+            <TableCell>LASTNAME</TableCell>
             <TableCell>CLUBNAME</TableCell>
             <TableCell>CITY</TableCell>
             <TableCell>STADIUM</TableCell>
@@ -60,8 +58,10 @@ export default function ClubsTable() {
         <TableBody>
           {clubs?.map((club, i) => (
             <TableRow key={club.Club?.clubId}>
-              <TableCell>{++i}</TableCell>
-              <TableCell scope="row">{club.Club?.clubName}</TableCell>
+              <TableCell>#{++i + pager.startIndex}</TableCell>
+              <TableCell>{club.Club?.firstName}</TableCell>
+              <TableCell>{club.Club?.lastName}</TableCell>
+              <TableCell>{club.Club?.clubName}</TableCell>
               <TableCell>{club.Club?.city}</TableCell>
               <TableCell>{club.Club?.clubName}</TableCell>
               <TableCell>{club.Club?.leagueLevel}</TableCell>

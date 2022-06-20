@@ -24,9 +24,9 @@ export async function loggedUser() {
 
 //Players
 
-export async function getAllPlayers() {
+export async function getAllPlayers(params) {
   try {
-    const result = await Client.get("player");
+    const result = await Client.get("player/paginate", { params });
     return result.data;
   } catch (err) {
     console.error("getAllPlayers", err);
@@ -45,9 +45,9 @@ export async function deletePlayer(id) {
 
 //Clubs
 
-export async function getAllClubs() {
+export async function getAllClubs(params) {
   try {
-    const result = await Client.get("club");
+    const result = await Client.get("club/paginate", { params });
     return result.data;
   } catch (err) {
     console.error("getAllClubs", err);
@@ -97,9 +97,9 @@ export async function registerAdmin(data) {
   }
 }
 
-export async function getAllAdmins() {
+export async function getAllAdmins(params) {
   try {
-    const result = await Client.get("admin");
+    const result = await Client.get("admin/paginate", { params });
     return result.data;
   } catch (err) {
     console.error("getAllAdmins", err);
