@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Clubs.module.scss";
-import { getAllClubs } from "../../api/ApiMethods";
-import ClubsTable from "./../../components/ClubsTable/ClubsTable";
-import Paginator from "../../components/Paginator/Paginator";
+import styles from "./Player.module.scss";
+import PlayersTable from "../../components/PlayersTable/PlayersTable";
 import SearchInput from "../../components/SearchInput/SearchInput";
+import { getAllPlayers } from "../../api/ApiMethods";
+import Paginator from "../../components/Paginator/Paginator";
 import { CircularProgress } from "@mui/material";
 
-export default function Club() {
-  const [clubs, setClubs] = useState([]);
+export default function Player() {
+  const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [pager, setPager] = useState({});
   const [query, setQuery] = useState({
@@ -16,11 +16,11 @@ export default function Club() {
     search: "",
   });
 
-  const fetchClubs = async () => {
+  const fetchPlayers = async () => {
     setLoading(true);
     try {
-      const result = await getAllClubs({ ...query });
-      setClubs(result.pageOfItems);
+      const result = await getAllPlayers({ ...query });
+      setPlayers(result.pageOfItems);
       setPager(result.pager);
     } finally {
       setLoading(false);
@@ -28,23 +28,27 @@ export default function Club() {
   };
 
   useEffect(() => {
-    fetchClubs();
+    fetchPlayers();
   }, [query]);
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <p className={styles.topText}>Clubs</p>
+        <p className={styles.topText}>Players</p>
         <SearchInput setQuery={setQuery} />
       </div>
       {!loading ? (
-        !!clubs?.length ? (
+        !!players?.length ? (
           <>
-            <ClubsTable clubs={clubs} pager={pager} setClubs={setClubs} />
+            <PlayersTable
+              players={players}
+              pager={pager}
+              setPlayers={setPlayers}
+            />
             <Paginator pager={pager} setQuery={setQuery} />
           </>
         ) : (
-          <span>No clubs found!</span>
+          <span>No players found!</span>
         )
       ) : (
         <CircularProgress size={55} style={{ alignSelf: "center" }} />

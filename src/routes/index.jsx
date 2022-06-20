@@ -24,7 +24,7 @@ function Router() {
           </Route>
           <Route path="/" element={<SecureRoute authData={authData} />}>
             {/* Routes that require authentication here */}
-            <Route path="/" element={<Home />} />
+            {/* <Route path="/" element={<Home />} /> */}
             <Route path="/player" element={<Player />} />
             <Route path="/club" exact element={<Club />} />
             <Route path="/vacancy" exact element={<Vacancy />} />

@@ -1,0 +1,23 @@
+@import "../../theme/colors";
+
+.container {
+  position: relative;
+  .inputContainer {
+    width: 220px;
+    height: 40px;
+    background-color: $gray5;
+    border-radius: 10px;
+    border: 3px solid $gray3;
+    color: $white;
+    padding-left: 15px;
+    font-size: 17px;
+  }
+  .searchIcon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 13px;
+    right: 14px;
+    fill: $white;
+  }
+}

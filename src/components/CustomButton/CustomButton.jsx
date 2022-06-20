@@ -1,19 +1,41 @@
-import Button from "@mui/material/Button";
+import { LoadingButton } from "@mui/lab";
 import styles from "./CustomButton.module.scss";
 
 import React from "react";
 
-const CustomInput = ({ label, onClick, containerStyle }) => {
+const CustomButton = ({
+  label,
+  loading,
+  onClick,
+  containerStyle,
+  labelStyle,
+  startIcon,
+  variant = "contained",
+  color = "#228176",
+}) => {
   return (
-    <Button
-      variant="contained"
+    <LoadingButton
+      variant={variant}
       className={styles.container}
       style={containerStyle}
       onClick={onClick}
+      loading={loading}
       type="submit"
+      sx={{
+        borderColor: color,
+        color: variant !== "contained" ? color : "white",
+        "&:hover": {
+          backgroundColor: color,
+          borderColor: color,
+          color: "white",
+        },
+      }}
+      startIcon={startIcon}
     >
-      <span className={styles.label}>{label}</span>
-    </Button>
+      <span style={labelStyle} className={styles.label}>
+        {label}
+      </span>
+    </LoadingButton>
   );
 };
-export default CustomInput;
+export default CustomButton;

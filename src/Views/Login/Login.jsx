@@ -7,10 +7,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { login } from "../../api/ApiMethods";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useSnackbar } from "notistack";
 
 function Login() {
+  const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const {
     handleSubmit,
     control,
@@ -19,15 +21,19 @@ function Login() {
     resolver: yupResolver(schema),
   });
 
-  let navigate = useNavigate();
-
   const { handleSignIn } = useContext(AuthContext);
 
   const handleLogin = async (data) => {
-    const response = await login(data);
-    if (response.status === 200) {
-      handleSignIn(response.data);
-      navigate("/player");
+    setLoading(true);
+    try {
+      const res = await login(data);
+      if (res.status === 200) {
+        handleSignIn(res.data);
+      } else {
+        enqueueSnackbar(res.response.data, { variant: "error" });
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -56,7 +62,7 @@ function Login() {
             errors={errors}
             type={"password"}
           />
-          <CustomButton label={"Login"} />
+          <CustomButton label={"Login"} loading={loading} />
         </form>
       </div>
     </div>

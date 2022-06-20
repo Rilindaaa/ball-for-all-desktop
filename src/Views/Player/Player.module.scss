@@ -3,7 +3,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  //   width: 100%;
   padding-bottom: 50px;
   padding-left: 30px;
   padding-right: 30px;
@@ -11,7 +10,7 @@
   border-radius: 6px;
 }
 .topText {
-  font-size: 18px;
+  font-size: 20px;
   font-family: "Poppins", sans-serif;
   color: $white;
   font-weight: 700;
@@ -30,4 +29,9 @@
   margin-left: 4px;
   margin-right: 4px;
   font-weight: 700;
+}
+.header {
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
 }

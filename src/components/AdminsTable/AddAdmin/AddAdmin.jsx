@@ -63,6 +63,9 @@ export default function AddAdminModal({ showFormModal, setShowFormModal }) {
                   width: "150px",
                   height: "40px",
                 }}
+                labelStyle={{
+                  fontSize: "15px",
+                }}
               />
               <CustomButton
                 label={"Cancel"}
@@ -73,6 +76,9 @@ export default function AddAdminModal({ showFormModal, setShowFormModal }) {
                   border: "1px solid gray",
                   backgroundColor: "transparent",
                   color: "gray",
+                }}
+                labelStyle={{
+                  fontSize: "15px",
                 }}
               />
             </div>

@@ -7,31 +7,43 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "./ClubsTable.module.scss";
-import { getAllClubs, deleteClub } from "../../api/ApiMethods";
-import { useEffect, useState } from "react";
+import { deleteClub, updateClub } from "../../api/ApiMethods";
 import { useConfirm } from "material-ui-confirm";
+import { useSnackbar } from "notistack";
+import CustomButton from "../CustomButton/CustomButton";
+import { ReactComponent as Verified } from "../../assets/svg/verified.svg";
 
-export default function ClubsTable() {
-  const [clubs, setClubs] = useState([]);
+export default function ClubsTable({ clubs, pager, setClubs }) {
   const confirm = useConfirm();
-
-  const fetchClubs = async () => {
-    const clubs = await getAllClubs();
-    setClubs(clubs);
-  };
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleDeleteClub = async (clubId) => {
     confirm({
       description: "Are you sure you want to delete this club?",
     }).then(async () => {
-      await deleteClub(clubId);
-      await fetchClubs();
+      const res = await deleteClub(clubId);
+      if ((res.status = 200)) {
+        enqueueSnackbar("Club was deleted!", { variant: "info" });
+        setClubs(clubs.filter(({ id }) => id !== clubId));
+      } else {
+        enqueueSnackbar("Please try again!", { variant: "error" });
+      }
     });
   };
 
-  useEffect(() => {
-    fetchClubs();
-  }, []);
+  const handleVerify = async (clubId) => {
+    const res = await updateClub(clubId, { isVerified: true });
+    if (res.status === 200) {
+      const updatedClubs = [];
+      clubs?.map((club) => {
+        if (club.id === clubId) {
+          club.Club.isVerified = true;
+        }
+        updatedClubs.push(club);
+      });
+      setClubs(updatedClubs);
+    }
+  };
 
   return (
     <TableContainer
@@ -45,33 +57,52 @@ export default function ClubsTable() {
       <Table
         sx={{ minWidth: 650, borderCollapse: 0 }}
         style={{ borderCollapse: "0px" }}
-        aria-label="simple table"
       >
         <TableHead>
           <TableRow className={styles.tableHeadRow}>
-            <TableCell>NR</TableCell>
+            <TableCell></TableCell>
+            <TableCell>FIRSTNAME</TableCell>
+            <TableCell>LASTNAME</TableCell>
             <TableCell>CLUBNAME</TableCell>
             <TableCell>CITY</TableCell>
             <TableCell>STADIUM</TableCell>
             <TableCell>LEAGUE LEVEL</TableCell>
+            <TableCell>VERIFIED</TableCell>
             <TableCell>ACTION</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {clubs?.map((club, i) => (
             <TableRow key={club.Club?.clubId}>
-              <TableCell>{++i}</TableCell>
-              <TableCell scope="row">{club.Club?.clubName}</TableCell>
+              <TableCell>#{++i + pager.startIndex}</TableCell>
+              <TableCell>{club.Club?.firstName}</TableCell>
+              <TableCell>{club.Club?.lastName}</TableCell>
+              <TableCell>{club.Club?.clubName}</TableCell>
               <TableCell>{club.Club?.city}</TableCell>
               <TableCell>{club.Club?.clubName}</TableCell>
               <TableCell>{club.Club?.leagueLevel}</TableCell>
               <TableCell>
-                <span
-                  style={{ cursor: "pointer" }}
+                {!club.Club?.isVerified ? (
+                  <CustomButton
+                    label="Verify"
+                    variant="outlined"
+                    onClick={() => handleVerify(club.id)}
+                    containerStyle={{ width: "100px", height: "40px" }}
+                    labelStyle={{ fontSize: "12px" }}
+                  />
+                ) : (
+                  <Verified style={{ marginLeft: 30 }} />
+                )}
+              </TableCell>
+              <TableCell>
+                <CustomButton
+                  label="Delete"
+                  variant="outlined"
+                  color="#ff0000"
                   onClick={() => handleDeleteClub(club.id)}
-                >
-                  Delete
-                </span>
+                  containerStyle={{ width: "100px", height: "40px" }}
+                  labelStyle={{ fontSize: "12px" }}
+                />
               </TableCell>
             </TableRow>
           ))}
