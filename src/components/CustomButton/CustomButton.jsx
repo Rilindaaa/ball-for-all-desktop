@@ -10,15 +10,26 @@ const CustomButton = ({
   containerStyle,
   labelStyle,
   startIcon,
+  variant = "contained",
+  color = "#228176",
 }) => {
   return (
     <LoadingButton
-      variant="contained"
+      variant={variant}
       className={styles.container}
       style={containerStyle}
       onClick={onClick}
       loading={loading}
       type="submit"
+      sx={{
+        borderColor: color,
+        color: color,
+        "&:hover": {
+          backgroundColor: color,
+          borderColor: color,
+          color: "white",
+        },
+      }}
       startIcon={startIcon}
     >
       <span style={labelStyle} className={styles.label}>

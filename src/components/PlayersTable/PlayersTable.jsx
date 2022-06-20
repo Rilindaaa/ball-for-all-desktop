@@ -11,6 +11,7 @@ import { deletePlayer } from "../../api/ApiMethods";
 import { useConfirm } from "material-ui-confirm";
 import { useSnackbar } from "notistack";
 import moment from "moment";
+import CustomButton from "./../CustomButton/CustomButton";
 
 export default function PlayersTable({ players, pager, setPlayers }) {
   const confirm = useConfirm();
@@ -73,12 +74,14 @@ export default function PlayersTable({ players, pager, setPlayers }) {
               <TableCell>{player.Player?.weight}</TableCell>
               <TableCell>{player.Player?.height}</TableCell>
               <TableCell>
-                <span
-                  style={{ cursor: "pointer" }}
+                <CustomButton
+                  label="Delete"
+                  variant="outlined"
+                  color="#ff0000"
                   onClick={() => handleDeletePlayer(player.id)}
-                >
-                  Delete
-                </span>
+                  containerStyle={{ width: "100px", height: "40px" }}
+                  labelStyle={{ fontSize: "12px" }}
+                />
               </TableCell>
             </TableRow>
           ))}

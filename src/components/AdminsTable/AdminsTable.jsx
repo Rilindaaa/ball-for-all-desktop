@@ -7,10 +7,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "./AdminsTable.module.scss";
-import { getAllAdmins, deleteAdmin } from "../../api/ApiMethods";
-import { useEffect, useState } from "react";
+import { deleteAdmin } from "../../api/ApiMethods";
 import { useConfirm } from "material-ui-confirm";
 import { useSnackbar } from "notistack";
+import CustomButton from "./../CustomButton/CustomButton";
 
 export default function AdminsTable({ admins, setAdmins, pager }) {
   const confirm = useConfirm();
@@ -61,12 +61,14 @@ export default function AdminsTable({ admins, setAdmins, pager }) {
               <TableCell>{admin.Admin.lastName}</TableCell>
               <TableCell>{admin.email}</TableCell>
               <TableCell>
-                <span
-                  style={{ cursor: "pointer" }}
+                <CustomButton
+                  label="Delete"
+                  variant="outlined"
+                  color="#ff0000"
                   onClick={() => handleDeleteAdmin(admin.id)}
-                >
-                  Delete
-                </span>
+                  containerStyle={{ width: "100px", height: "40px" }}
+                  labelStyle={{ fontSize: "12px" }}
+                />
               </TableCell>
             </TableRow>
           ))}

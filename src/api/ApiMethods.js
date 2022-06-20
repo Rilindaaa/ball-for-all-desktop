@@ -54,6 +54,15 @@ export async function getAllClubs(params) {
   }
 }
 
+export async function updateClub(clubId, data) {
+  try {
+    const result = await Client.put(`club/${clubId}`, { ...data });
+    return result;
+  } catch (err) {
+    console.error("updateClub", err);
+  }
+}
+
 export async function deleteClub(id) {
   try {
     const result = await Client.delete(`club/${id}`);

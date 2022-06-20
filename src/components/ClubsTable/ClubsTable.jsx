@@ -7,9 +7,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "./ClubsTable.module.scss";
-import { deleteClub } from "../../api/ApiMethods";
+import { deleteClub, updateClub } from "../../api/ApiMethods";
 import { useConfirm } from "material-ui-confirm";
 import { useSnackbar } from "notistack";
+import CustomButton from "../CustomButton/CustomButton";
+import { ReactComponent as Verified } from "../../assets/svg/verified.svg";
 
 export default function ClubsTable({ clubs, pager, setClubs }) {
   const confirm = useConfirm();
@@ -29,6 +31,20 @@ export default function ClubsTable({ clubs, pager, setClubs }) {
     });
   };
 
+  const handleVerify = async (clubId) => {
+    const res = await updateClub(clubId, { isVerified: true });
+    if (res.status === 200) {
+      const updatedClubs = [];
+      clubs?.map((club) => {
+        if (club.id === clubId) {
+          club.Club.isVerified = true;
+        }
+        updatedClubs.push(club);
+      });
+      setClubs(updatedClubs);
+    }
+  };
+
   return (
     <TableContainer
       style={{
@@ -41,7 +57,6 @@ export default function ClubsTable({ clubs, pager, setClubs }) {
       <Table
         sx={{ minWidth: 650, borderCollapse: 0 }}
         style={{ borderCollapse: "0px" }}
-        aria-label="simple table"
       >
         <TableHead>
           <TableRow className={styles.tableHeadRow}>
@@ -52,6 +67,7 @@ export default function ClubsTable({ clubs, pager, setClubs }) {
             <TableCell>CITY</TableCell>
             <TableCell>STADIUM</TableCell>
             <TableCell>LEAGUE LEVEL</TableCell>
+            <TableCell>VERIFIED</TableCell>
             <TableCell>ACTION</TableCell>
           </TableRow>
         </TableHead>
@@ -66,12 +82,27 @@ export default function ClubsTable({ clubs, pager, setClubs }) {
               <TableCell>{club.Club?.clubName}</TableCell>
               <TableCell>{club.Club?.leagueLevel}</TableCell>
               <TableCell>
-                <span
-                  style={{ cursor: "pointer" }}
+                {!club.Club?.isVerified ? (
+                  <CustomButton
+                    label="Verify"
+                    variant="outlined"
+                    onClick={() => handleVerify(club.id)}
+                    containerStyle={{ width: "100px", height: "40px" }}
+                    labelStyle={{ fontSize: "12px" }}
+                  />
+                ) : (
+                  <Verified style={{ marginLeft: 30 }} />
+                )}
+              </TableCell>
+              <TableCell>
+                <CustomButton
+                  label="Delete"
+                  variant="outlined"
+                  color="#ff0000"
                   onClick={() => handleDeleteClub(club.id)}
-                >
-                  Delete
-                </span>
+                  containerStyle={{ width: "100px", height: "40px" }}
+                  labelStyle={{ fontSize: "12px" }}
+                />
               </TableCell>
             </TableRow>
           ))}

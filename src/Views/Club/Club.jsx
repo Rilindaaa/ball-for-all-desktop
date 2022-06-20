@@ -12,7 +12,7 @@ export default function Club() {
   const [pager, setPager] = useState({});
   const [query, setQuery] = useState({
     page: 1,
-    pageSize: 2,
+    pageSize: 7,
     search: "",
   });
 
