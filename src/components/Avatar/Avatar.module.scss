@@ -1,0 +1,28 @@
+@import "../../theme/colors";
+
+.avatarContainer {
+  width: 45px;
+  height: 45px;
+  background-color: $gray3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 70px;
+  border-width: 1px;
+  border-color: $light;
+}
+.initials {
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 2;
+}
+.imageStyle {
+  width: 45px;
+  height: 45px;
+  border-radius: 30px;
+  padding: 5px;
+  border-width: 0.5px;
+  border-color: $gray3;
+}

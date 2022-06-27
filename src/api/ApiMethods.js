@@ -45,12 +45,21 @@ export async function deletePlayer(id) {
 
 //Clubs
 
-export async function getAllClubs(params) {
+export async function getAllClubs() {
+  try {
+    const result = await Client.get("club");
+    return result.data;
+  } catch (err) {
+    console.error("getAllClubs", err);
+  }
+}
+
+export async function getPaginatedClubs(params) {
   try {
     const result = await Client.get("club/paginate", { params });
     return result.data;
   } catch (err) {
-    console.error("getAllClubs", err);
+    console.error("getPaginatedClubs", err);
   }
 }
 
@@ -75,10 +84,10 @@ export async function deleteClub(id) {
 
 //Vacancies
 
-export async function getAllVacancies() {
+export async function getAllVacancies(params) {
   try {
-    const result = await Client.get("vacancy");
-    return result.data;
+    const result = await Client.get("vacancy", { params });
+    return result;
   } catch (err) {
     console.error("getAllVacancies", err);
   }
@@ -122,5 +131,38 @@ export async function deleteAdmin(id) {
   } catch (err) {
     console.error("deleteAdmin", err);
     return err;
+  }
+}
+
+// Reports
+
+export async function getAllReports(params) {
+  try {
+    const result = await Client.get("post-report", { params });
+    return result;
+  } catch (err) {
+    console.error("getAllReports", err);
+  }
+}
+
+// Post
+
+export async function deletePost(id) {
+  try {
+    const result = await Client.delete(`post/${id}`);
+    return result;
+  } catch (err) {
+    console.error("deletePost", err);
+  }
+}
+
+// Users
+
+export async function getAllUsers() {
+  try {
+    const result = await Client.get("user");
+    return result.data;
+  } catch (err) {
+    console.error("getAllUsers", err);
   }
 }

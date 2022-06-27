@@ -1,0 +1,54 @@
+@import "../../theme/colors";
+
+.container {
+  margin: 8px 0;
+  background-color: $headerBg;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid rgba($gray4, 0.5);
+
+  .topContainer {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 7px;
+    border-bottom: 1px solid rgba($gray4, 0.3);
+    .userData {
+      display: flex;
+      align-items: center;
+      .dateContainer {
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-left: 10px;
+      }
+      .name {
+        color: $white;
+        font-size: 20px;
+      }
+      .date {
+        color: rgba($gray3, 0.8);
+        font-size: 12px;
+      }
+    }
+  }
+
+  .middleContainer {
+    width: 100%;
+    margin: 15px 0;
+  }
+  .description {
+    color: $placeholder;
+    margin-bottom: 10px;
+  }
+  .image {
+    width: 100%;
+    height: auto;
+    align-self: center;
+    border-radius: 10px;
+  }
+}

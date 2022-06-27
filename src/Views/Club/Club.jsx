@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Clubs.module.scss";
-import { getAllClubs } from "../../api/ApiMethods";
+import { getPaginatedClubs } from "../../api/ApiMethods";
 import ClubsTable from "./../../components/ClubsTable/ClubsTable";
 import Paginator from "../../components/Paginator/Paginator";
 import SearchInput from "../../components/SearchInput/SearchInput";
@@ -19,7 +19,7 @@ export default function Club() {
   const fetchClubs = async () => {
     setLoading(true);
     try {
-      const result = await getAllClubs({ ...query });
+      const result = await getPaginatedClubs({ ...query });
       setClubs(result.pageOfItems);
       setPager(result.pager);
     } finally {

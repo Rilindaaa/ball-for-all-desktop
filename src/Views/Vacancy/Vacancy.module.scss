@@ -10,8 +10,14 @@
   border-radius: 6px;
 }
 .topText {
-  font-size: 18px;
+  font-size: 28px;
   font-family: "Poppins", sans-serif;
   color: $white;
   font-weight: 700;
+  margin: 15px 0;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
 }

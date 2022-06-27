@@ -1,0 +1,85 @@
+@import "../../theme/colors";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: $headerBg;
+  border-radius: 6px;
+}
+.topText {
+  font-size: 28px;
+  font-family: "Poppins", sans-serif;
+  color: $white;
+  font-weight: 700;
+  margin: 15px 0;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.reports {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 20px;
+  .report {
+    width: 43%;
+    border: 1px solid $gray4;
+    padding: 20px;
+    border-radius: 10px;
+    color: $light;
+
+    .reporter {
+      margin-bottom: 15px;
+      > h3 {
+        color: $gray3;
+        margin-bottom: 5px;
+      }
+      > div {
+        display: flex;
+        align-items: center;
+        border: 1px solid rgba($gray4, 0.5);
+        padding: 10px;
+        border-radius: 10px;
+        .reporterData {
+          margin-left: 10px;
+          > h4 {
+            margin: 0;
+          }
+          > p {
+            margin: 0;
+            color: $gray3;
+            font-size: 13px;
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+    .reason {
+      margin-bottom: 15px;
+      > h3 {
+        color: $gray3;
+        margin-bottom: 5px;
+      }
+      > span {
+        display: flex;
+        border: 1px solid rgba($gray4, 0.5);
+        padding: 10px;
+        border-radius: 10px;
+        margin: 0;
+        color: $gray3;
+        font-size: 14px;
+      }
+    }
+    .post {
+      h3 {
+        color: $gray3;
+      }
+    }
+  }
+}
