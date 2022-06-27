@@ -10,6 +10,7 @@ import Player from "../Views/Player/Player.jsx";
 import Club from "../Views/Club/Club.jsx";
 import Admin from "../Views/Admin/Admin.jsx";
 import Vacancy from "../Views/Vacancy/Vacancy.jsx";
+import Reports from "../Views/Reports/Reports.jsx";
 
 function Router() {
   const { loading, authData } = useContext(AuthContext);
@@ -28,6 +29,7 @@ function Router() {
             <Route path="/player" element={<Player />} />
             <Route path="/club" exact element={<Club />} />
             <Route path="/vacancy" exact element={<Vacancy />} />
+            <Route path="/reports" exact element={<Reports />} />
             {authData?.Admin?.isSuperAdmin && (
               <Route path="/admin" exact element={<Admin />} />
             )}

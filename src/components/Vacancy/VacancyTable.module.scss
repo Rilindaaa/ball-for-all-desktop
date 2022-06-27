@@ -1,10 +1,86 @@
 @import "../../theme/colors";
 
-.override {
-  color: red !important;
-}
-.tableHeadRow {
-  td {
-    font-family: "Poppins", sans-serif;
+.vacancies {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 20px;
+  .vacancy {
+    width: 40%;
+    border: 1px solid $gray4;
+    border-radius: 10px;
+    padding: 20px;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+  }
+  .characteristics {
+    display: flex;
+    .characteristicsLabel {
+      display: flex;
+      flex-direction: column;
+      font-weight: 700;
+      margin-right: 18px;
+      span {
+        padding: 5px 0px;
+        font-size: 18px;
+        color: $gray3;
+      }
+    }
+    .characteristicsValue {
+      display: flex;
+      flex-direction: column;
+      span {
+        font-size: 18px;
+        padding: 5px 0px;
+        font-weight: 600;
+      }
+    }
+  }
+  .about {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    h4 {
+      margin: 0;
+    }
+    p {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+      margin-top: 5px;
+    }
+  }
+
+  .position {
+    h3 {
+      margin: 10px 0;
+    }
+  }
+
+  .club {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $gray4;
+    .clubData {
+      display: flex;
+      align-items: center;
+      h2 {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .applications {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    .applicationsIcon {
+      width: 25px;
+      height: 25px;
+      margin-right: 5px;
+    }
   }
 }

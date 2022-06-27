@@ -1,89 +1,74 @@
 import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import styles from "./VacancyTable.module.scss";
-import { getAllVacancies, deleteVacancy } from "../../api/ApiMethods";
-import { useEffect, useState } from "react";
+import { deleteVacancy } from "../../api/ApiMethods";
 import { useConfirm } from "material-ui-confirm";
 import { positions } from "../../data/positions";
+import CustomButton from "./../CustomButton/CustomButton";
+import { ReactComponent as Applications } from "../../assets/svg/applications.svg";
+import Avatar from "./../Avatar/Avatar";
 
-export default function VacancyTable() {
-  const [vacancies, setVacancies] = useState([]);
+export default function VacancyTable({ vacancies, setVacancies }) {
   const confirm = useConfirm();
-
-  const fetchVacancies = async () => {
-    const vacancies = await getAllVacancies();
-    setVacancies(vacancies);
-  };
 
   const handleDeleteVacancies = async (vacancyId) => {
     confirm({
       description: "Are you sure you want to delete this vacancy?",
     }).then(async () => {
       await deleteVacancy(vacancyId);
-      await fetchVacancies();
+      setVacancies(vacancies.filter(({ id }) => id !== vacancyId));
     });
   };
 
-  useEffect(() => {
-    fetchVacancies();
-  }, []);
-
   return (
-    <TableContainer
-      style={{
-        backgroundColor: "#1f1f1f",
-        border: "0.5px solid rgba(173,173,173,0.3)",
-        borderRadius: "6px",
-      }}
-      component={Paper}
-    >
-      <Table
-        sx={{ minWidth: 650, borderCollapse: 0 }}
-        style={{ borderCollapse: "0px" }}
-        aria-label="simple table"
-      >
-        <TableHead>
-          <TableRow className={styles.tableHeadRow}>
-            <TableCell>NR</TableCell>
-            <TableCell>ABOUT</TableCell>
-            <TableCell>HEIGHT</TableCell>
-            <TableCell>FOOT</TableCell>
-            <TableCell>POSITION</TableCell>
-            <TableCell>ACTION</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {vacancies?.map((vacancy, i) => (
-            <TableRow key={vacancy.id}>
-              <TableCell>{++i}</TableCell>
-              <TableCell scope="row">{vacancy?.about}</TableCell>
-              <TableCell>{vacancy?.height}</TableCell>
-              <TableCell>{vacancy?.foot}</TableCell>
-              <TableCell>
-                {" "}
-                {
-                  positions.find(({ value }) => value === vacancy?.position)
-                    ?.label
-                }
-              </TableCell>
-              <TableCell>
-                <span
-                  style={{ cursor: "pointer" }}
-                  onClick={() => handleDeleteVacancies(vacancy.id)}
-                >
-                  Delete
-                </span>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div className={styles.vacancies}>
+      {vacancies?.map((vacancy, i) => (
+        <div className={styles.vacancy} key={vacancy.id}>
+          <div className={styles.club}>
+            <div className={styles.clubData}>
+              <Avatar size={45} name={vacancy.Club.clubName} />
+              <h2>{vacancy.Club.clubName}</h2>
+            </div>
+            <CustomButton
+              label="Delete"
+              variant="outlined"
+              color="#ff0000"
+              onClick={() => handleDeleteVacancies(vacancy.id)}
+              containerStyle={{ width: "100px", height: "40px" }}
+              labelStyle={{ fontSize: "12px" }}
+            />
+          </div>
+          <div className={styles.position}>
+            <h3>
+              {
+                positions.find(({ value }) => value === vacancy?.position)
+                  ?.label
+              }
+            </h3>
+          </div>
+          <div className={styles.about}>
+            <h4>About:</h4>
+            <p>{vacancy?.about}</p>
+          </div>
+          <div className={styles.characteristics}>
+            <div className={styles.characteristicsLabel}>
+              <span>Age:</span>
+              <span>Foot:</span>
+              <span>Minimum height:</span>
+            </div>
+            <div className={styles.characteristicsValue}>
+              <span>
+                {vacancy?.ageFrom} - {vacancy?.ageTo}
+              </span>
+              <span>{vacancy?.foot}</span>
+              <span>{vacancy?.height} cm</span>
+            </div>
+          </div>
+          <div className={styles.applications}>
+            <Applications className={styles.applicationsIcon} />
+            {vacancy.VacancyApplications.length} applications
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }

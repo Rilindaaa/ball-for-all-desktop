@@ -3,6 +3,7 @@ import { ReactComponent as Player } from "../../assets/svg/players.svg";
 import { ReactComponent as Club } from "../../assets/svg/clubs.svg";
 import { ReactComponent as Admin } from "../../assets/svg/admins.svg";
 import { ReactComponent as Vacancy } from "../../assets/svg/vacancy.svg";
+import { ReactComponent as Reports } from "../../assets/svg/reports.svg";
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -34,17 +35,6 @@ const Sidebar = () => {
           <span className={styles.sectionText}>Clubs</span>
         </div>
       </NavLink>
-      <NavLink
-        to="/vacancy"
-        className={({ isActive }) =>
-          styles.subContainer + (isActive ? " " + styles.linkActive : "")
-        }
-      >
-        <div className={styles.item}>
-          <Vacancy className={styles.icon} width={27} height={25} />
-          <span className={styles.sectionText}>Vacancies</span>
-        </div>
-      </NavLink>
       {!loading && authData?.Admin?.isSuperAdmin && (
         <NavLink
           to="/admin"
@@ -58,6 +48,28 @@ const Sidebar = () => {
           </div>
         </NavLink>
       )}
+      <NavLink
+        to="/vacancy"
+        className={({ isActive }) =>
+          styles.subContainer + (isActive ? " " + styles.linkActive : "")
+        }
+      >
+        <div className={styles.item}>
+          <Vacancy className={styles.icon} width={27} height={25} />
+          <span className={styles.sectionText}>Vacancies</span>
+        </div>
+      </NavLink>
+      <NavLink
+        to="/reports"
+        className={({ isActive }) =>
+          styles.subContainer + (isActive ? " " + styles.linkActive : "")
+        }
+      >
+        <div className={styles.item}>
+          <Reports className={styles.icon} width={27} height={25} />
+          <span className={styles.sectionText}>Reports</span>
+        </div>
+      </NavLink>
     </div>
   );
 };

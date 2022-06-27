@@ -71,8 +71,8 @@ export default function PlayersTable({ players, pager, setPlayers }) {
               <TableCell>{player.Player?.city}</TableCell>
               <TableCell>{player.Player?.foot}</TableCell>
               <TableCell>{player.Player?.position}</TableCell>
-              <TableCell>{player.Player?.weight}</TableCell>
-              <TableCell>{player.Player?.height}</TableCell>
+              <TableCell>{player.Player?.weight} kg</TableCell>
+              <TableCell>{player.Player?.height} cm</TableCell>
               <TableCell>
                 <CustomButton
                   label="Delete"
