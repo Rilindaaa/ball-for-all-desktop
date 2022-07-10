@@ -12,6 +12,7 @@ const CustomInput = ({
   rules,
   errors,
   type,
+  multiline,
 }) => {
   return (
     <div className={styles.container}>
@@ -29,6 +30,7 @@ const CustomInput = ({
             value={value}
             onChange={onChange}
             type={type}
+            multiline={multiline}
             sx={{
               "& .MuiOutlinedInput-root:hover": {
                 "& > fieldset": {

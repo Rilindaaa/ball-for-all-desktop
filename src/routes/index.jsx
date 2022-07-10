@@ -11,6 +11,7 @@ import Club from "../Views/Club/Club.jsx";
 import Admin from "../Views/Admin/Admin.jsx";
 import Vacancy from "../Views/Vacancy/Vacancy.jsx";
 import Reports from "../Views/Reports/Reports.jsx";
+import Ads from "../Views/Ads/Ads";
 
 function Router() {
   const { loading, authData } = useContext(AuthContext);
@@ -25,7 +26,6 @@ function Router() {
           </Route>
           <Route path="/" element={<SecureRoute authData={authData} />}>
             {/* Routes that require authentication here */}
-            {/* <Route path="/" element={<Home />} /> */}
             <Route path="/player" element={<Player />} />
             <Route path="/club" exact element={<Club />} />
             <Route path="/vacancy" exact element={<Vacancy />} />
@@ -33,6 +33,7 @@ function Router() {
             {authData?.Admin?.isSuperAdmin && (
               <Route path="/admin" exact element={<Admin />} />
             )}
+            <Route path="/ads" exact element={<Ads />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>

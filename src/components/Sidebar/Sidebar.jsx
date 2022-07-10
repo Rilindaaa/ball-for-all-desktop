@@ -4,6 +4,7 @@ import { ReactComponent as Club } from "../../assets/svg/clubs.svg";
 import { ReactComponent as Admin } from "../../assets/svg/admins.svg";
 import { ReactComponent as Vacancy } from "../../assets/svg/vacancy.svg";
 import { ReactComponent as Reports } from "../../assets/svg/reports.svg";
+import { ReactComponent as Ads } from "../../assets/svg/ads.svg";
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -68,6 +69,17 @@ const Sidebar = () => {
         <div className={styles.item}>
           <Reports className={styles.icon} width={27} height={25} />
           <span className={styles.sectionText}>Reports</span>
+        </div>
+      </NavLink>
+      <NavLink
+        to="/ads"
+        className={({ isActive }) =>
+          styles.subContainer + (isActive ? " " + styles.linkActive : "")
+        }
+      >
+        <div className={styles.item}>
+          <Ads className={styles.icon} width={27} height={25} />
+          <span className={styles.sectionText}>Ads</span>
         </div>
       </NavLink>
     </div>

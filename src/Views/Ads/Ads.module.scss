@@ -14,24 +14,15 @@
   font-family: "Poppins", sans-serif;
   color: $white;
   font-weight: 700;
-}
-.textContainer {
-  display: flex;
-  flex-direction: row;
-  color: $white;
-  font-family: "Poppins", sans-serif;
-}
-.space {
-  margin-left: 4px;
-  margin-right: 4px;
-}
-.name {
-  margin-left: 4px;
-  margin-right: 4px;
-  font-weight: 700;
+  margin: 15px 0;
 }
 .header {
-  padding: 20px 0;
   display: flex;
   justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  .plusIcon {
+    fill: $white;
+    width: 13px;
+  }
 }
