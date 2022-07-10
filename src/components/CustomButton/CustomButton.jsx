@@ -12,6 +12,7 @@ const CustomButton = ({
   startIcon,
   variant = "contained",
   color = "#228176",
+  type = "submit",
 }) => {
   return (
     <LoadingButton
@@ -20,7 +21,7 @@ const CustomButton = ({
       style={containerStyle}
       onClick={onClick}
       loading={loading}
-      type="submit"
+      type={type}
       sx={{
         borderColor: color,
         color: variant !== "contained" ? color : "white",

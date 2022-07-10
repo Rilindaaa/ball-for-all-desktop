@@ -166,3 +166,44 @@ export async function getAllUsers() {
     console.error("getAllUsers", err);
   }
 }
+
+// Ads
+
+export async function createAd(data) {
+  try {
+    const result = await Client.post(`ad`, { ...data });
+    return result;
+  } catch (err) {
+    console.error("createAd", err);
+    return err;
+  }
+}
+
+export async function getAllAds() {
+  try {
+    const result = await Client.get("ad");
+    return result;
+  } catch (err) {
+    console.error("getAllAds", err);
+  }
+}
+
+export async function updateAd(data, id) {
+  try {
+    const result = await Client.put(`ad/${id}`, { ...data });
+    return result;
+  } catch (err) {
+    console.error("updateAd", err);
+    return err;
+  }
+}
+
+export async function deleteAd(id) {
+  try {
+    const result = await Client.delete(`ad/${id}`);
+    return result;
+  } catch (err) {
+    console.error("deleteAd", err);
+    return err;
+  }
+}

@@ -1,0 +1,8 @@
+@import "../../theme/colors";
+
+.ads {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 20px;
+}
